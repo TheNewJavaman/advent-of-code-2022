@@ -13,8 +13,8 @@ fn main() {
         .rev();
 
     let top1 = elf_sums.clone().max().unwrap();
-    println!("1. Top 1: {top1}");
+    println!("1. {top1}");
 
     let top3: u32 = elf_sums.take(3).sum();
-    println!("2. Top 3: {top3}");
+    println!("2. {top3}");
 }
