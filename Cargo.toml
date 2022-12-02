@@ -7,7 +7,6 @@ authors = ["Gabriel Pizarro <gpizarro@javaman.net>"]
 
 [dependencies]
 itertools = "0.10"
-num_enum = "0.5"
 
 [[bin]]
 name = "day1"

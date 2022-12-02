@@ -1,17 +1,16 @@
 fn main() {
     let input = include_str!("input/day2.txt");
     let rounds = input.split('\n').map(|line| {
-        let mut chars = line.chars();
-        let opp = chars.next().unwrap();
-        chars.next();
-        let you = chars.next().unwrap();
-        (you, Strat::from(opp))
+        let mut cols = line.chars();
+        let col1 = cols.next().unwrap();
+        let col2 = cols.nth(1).unwrap();
+        (col1, col2)
     });
 
     let mixup = rounds
         .clone()
-        .map(|(you, opp)| {
-            let you = Strat::from(you);
+        .map(|(col1, col2)| {
+            let (opp, you) = (Strat::from(col1), Strat::from(col2));
             let outcome = if you == opp {
                 Outcome::Draw
             } else {
@@ -31,12 +30,12 @@ fn main() {
     println!("1. {mixup}");
 
     let actual = rounds
-        .map(|(you, opp)| {
-            let you = Outcome::from(you);
-            let strat = if you == Outcome::Draw {
+        .map(|(col1, col2)| {
+            let (opp, outcome) = (Strat::from(col1), Outcome::from(col2));
+            let you = if outcome == Outcome::Draw {
                 opp
             } else {
-                match (you, opp) {
+                match (outcome, opp) {
                     (Outcome::Loss, Strat::Rock) => Strat::Scissors,
                     (Outcome::Loss, Strat::Paper) => Strat::Rock,
                     (Outcome::Loss, Strat::Scissors) => Strat::Paper,
@@ -46,7 +45,7 @@ fn main() {
                     _ => unreachable!(),
                 }
             };
-            you as u32 + strat as u32
+            you as u32 + outcome as u32
         })
         .sum::<u32>();
     println!("2. {actual}");

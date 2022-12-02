@@ -5,7 +5,8 @@ fn main() {
     let elf_sums = input
         .split("\n\n")
         .map(|goodies| {
-            goodies.split("\n")
+            goodies
+                .split('\n')
                 .map(|snack| snack.parse::<u32>().unwrap())
                 .sum::<u32>()
         })
