@@ -15,12 +15,12 @@ fn main() {
                 Outcome::Draw
             } else {
                 match (you, opp) {
-                    (Strat::Rock, Strat::Paper) => Outcome::Loss,
-                    (Strat::Rock, Strat::Scissors) => Outcome::Win,
-                    (Strat::Paper, Strat::Rock) => Outcome::Win,
-                    (Strat::Paper, Strat::Scissors) => Outcome::Loss,
-                    (Strat::Scissors, Strat::Rock) => Outcome::Loss,
-                    (Strat::Scissors, Strat::Paper) => Outcome::Win,
+                    (Strat::Rock, Strat::Paper)
+                    | (Strat::Paper, Strat::Scissors)
+                    | (Strat::Scissors, Strat::Rock) => Outcome::Loss,
+                    (Strat::Rock, Strat::Scissors)
+                    | (Strat::Paper, Strat::Rock)
+                    | (Strat::Scissors, Strat::Paper) => Outcome::Win,
                     _ => unreachable!(),
                 }
             };
@@ -36,12 +36,9 @@ fn main() {
                 opp
             } else {
                 match (outcome, opp) {
-                    (Outcome::Loss, Strat::Rock) => Strat::Scissors,
-                    (Outcome::Loss, Strat::Paper) => Strat::Rock,
-                    (Outcome::Loss, Strat::Scissors) => Strat::Paper,
-                    (Outcome::Win, Strat::Rock) => Strat::Paper,
-                    (Outcome::Win, Strat::Paper) => Strat::Scissors,
-                    (Outcome::Win, Strat::Scissors) => Strat::Rock,
+                    (Outcome::Loss, Strat::Paper) | (Outcome::Win, Strat::Scissors) => Strat::Rock,
+                    (Outcome::Loss, Strat::Scissors) | (Outcome::Win, Strat::Rock) => Strat::Paper,
+                    (Outcome::Loss, Strat::Rock) | (Outcome::Win, Strat::Paper) => Strat::Scissors,
                     _ => unreachable!(),
                 }
             };
