@@ -1,16 +1,15 @@
 fn main() {
-    let input = include_str!("input/day2.txt");
-    let rounds = input.split('\n').map(|line| {
+    let rounds = include_str!("input/day2.txt").split('\n').map(|line| {
         let mut cols = line.chars();
         let col1 = cols.next().unwrap();
         let col2 = cols.nth(1).unwrap();
         (col1, col2)
     });
 
-    let mixup = rounds
+    let part1: u32 = rounds
         .clone()
-        .map(|(col1, col2)| {
-            let (opp, you) = (Strat::from(col1), Strat::from(col2));
+        .map(|(opp, you)| {
+            let (opp, you) = (Strat::from(opp), Strat::from(you));
             let outcome = if you == opp {
                 Outcome::Draw
             } else {
@@ -26,10 +25,10 @@ fn main() {
             };
             you as u32 + outcome as u32
         })
-        .sum::<u32>();
-    println!("1. {mixup}");
+        .sum();
+    println!("1. {part1}");
 
-    let actual = rounds
+    let part2: u32 = rounds
         .map(|(col1, col2)| {
             let (opp, outcome) = (Strat::from(col1), Outcome::from(col2));
             let you = if outcome == Outcome::Draw {
@@ -44,8 +43,8 @@ fn main() {
             };
             you as u32 + outcome as u32
         })
-        .sum::<u32>();
-    println!("2. {actual}");
+        .sum();
+    println!("2. {part2}");
 }
 
 #[derive(PartialEq, Clone, Copy)]

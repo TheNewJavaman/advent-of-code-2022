@@ -12,4 +12,10 @@ itertools = "0.10"
 name = "day1"
 
 [[bin]]
-name = "day2"
+name = "day2_idiomatic"
+
+[[bin]]
+name = "day2_algorithmic"
+
+[[bin]]
+name = "day3"

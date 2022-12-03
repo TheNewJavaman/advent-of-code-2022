@@ -1,8 +1,7 @@
 use itertools::Itertools;
 
 fn main() {
-    let input = include_str!("input/day1.txt");
-    let elf_sums = input
+    let elf_sums = include_str!("input/day1.txt")
         .split("\n\n")
         .map(|goodies| {
             goodies
@@ -13,9 +12,9 @@ fn main() {
         .sorted()
         .rev();
 
-    let top1 = elf_sums.clone().max().unwrap();
-    println!("1. {top1}");
+    let part1 = elf_sums.clone().max().unwrap();
+    println!("1. {part1}");
 
-    let top3: u32 = elf_sums.take(3).sum();
-    println!("2. {top3}");
+    let part2: u32 = elf_sums.take(3).sum();
+    println!("2. {part2}");
 }
